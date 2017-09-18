@@ -2,7 +2,7 @@
 
 # Thomas
 
-## Question: Have you ever been in trouble to grasp or apply DDD concepts in your code?
+## Question: Have you ever been into trouble to grasp or after, apply DDD concepts in your code?
 [5 sec]
 
 Did you ever feel in pain to make the link between DDD concepts and your code?
