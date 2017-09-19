@@ -1,7 +1,7 @@
 
 # Walking skeleton
 
-## Intro - 20 minutes ?
+## Intro - 12 minutes 
  - Question to the audience
  - Storytelling Bruno
  - Speakers presentation

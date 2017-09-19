@@ -2,7 +2,7 @@
 
 # Thomas
 
-## Question: Have you ever been into trouble to grasp or after, apply DDD concepts in your code?
+## Question: Have you ever been into trouble to grasp or after, to apply DDD concepts in your code?
 [5 sec]
 
 Did you ever feel in pain to make the link between DDD concepts and your code?
@@ -54,14 +54,6 @@ Good. Our domain for today is: "Train seats reservation". In particular: optimiz
 
 We will start from a legacy application that we have just discovered this morning.
 
-# Bruno
-
-We don't live dangerously. WE NEVER REFACTOR A LEGACY CODE BASE WITHOUT A SAFETY NET!
-
-Reason why we have just introduced a test harness before our session.
-
-# Thomas
-
 Ok, let's get back to our case.
 
 We have just been hired by the TrainTrain company (a startup). They asked us to investigate *why they are currently paying too much fees to the official national train operator*.
@@ -94,13 +86,13 @@ As you will see, all our acceptance tests are based on the same pattern:
 
 # Bruno
 
-- First test: it's the happy path: We reserve 3 seats in an empty train of 10 seats
+- 1st test: it's the happy path: We reserve 3 seats in an empty train of 10 seats
 
-- Second test: is to highlight a reservation failure. Here we have a train of 10 seats with 6 already reserved and we ask for 3 seats. According to our domain expert, this should fail due to a business constraint: __WE ARE NOT ALLOWED TO RESERVE MORE THAN 70% OF A TRAIN CAPACITY__. So here with 10 seats, the max allowed is 7 seats. 6+3 => 9 which is not allowed.
+- 2nd test: is to highlight a reservation failure. Here we have a train of 10 seats but with 6 already reserved and we ask for 3 seats. According to our domain expert, this should fail due to a business constraint: __WE ARE NOT ALLOWED TO RESERVE MORE THAN 70% OF A TRAIN CAPACITY__. So here with 10 seats, the max allowed is 7 seats. 6+3 => 9 which is not allowed.
 
 # Thomas
 
-- Third test: was the one where discovered a bug. Indeed, the domain expert told us that a reservation should always be in the same coach (to avoid to split families and friends). Here we have spoted a case where our system reserved us 2 seats in 2 different coaches (here 10A and 1B). Instead, we should have expected to have 1B and 2B.
+- 3rd test: was the one where discovered a bug. Indeed, the domain expert told us that a reservation should always be in the same coach (to avoid to split families and friends). Here we have spoted a case where our system reserved us 2 seats in 2 different coaches (here 10A and 1B). Instead, we should have expected to have 1B and 2B.
 
 VERY INTERSTING: because this problem should be the root cause of the extra fees. Indeed, imagine you have requested 2 seats for you and your friend. Once you realize you will be separated, you will most likely cancel the reservation. And since all the external services calls are charged to TrainTrain, they will be done for nothing in the first reservation attempt.
 
@@ -109,6 +101,10 @@ It's pure waste for TrainTrain startup perspective. __So we are here to fix that
 # Bruno
 
 The code we have just seen this morning is really crappy. Thus we need to clean-up the mess before being able to fix the bug.
+
+We don't live dangerously. WE NEVER REFACTOR A LEGACY CODE BASE WITHOUT A SAFETY NET!
+
+Reason why we have just introduced a test harness before our session.
 
 We need to refactor. To do that, we first have to ignore the falling test. Otherwise we would never seen if we break the existing code or not.
 
